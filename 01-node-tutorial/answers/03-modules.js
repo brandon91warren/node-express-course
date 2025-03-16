@@ -4,7 +4,7 @@ const data = require("./06-alternative-flavor");
 require("./07-mind-grenade"); 
 
 sayHi(names.brandon);
-sayHi(names.warren);
+sayHi(names.priya);
 
 console.log(data);
 console.log(data.items);

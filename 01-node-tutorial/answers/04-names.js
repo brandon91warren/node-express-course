@@ -1,6 +1,6 @@
 const names = {
     brandon: "Brandon",
-    warren: "Warren",
+    priya: "Priya",
   };
 
   module.exports = names;
