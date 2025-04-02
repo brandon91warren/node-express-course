@@ -40,6 +40,10 @@ const server = http.createServer((req, res) => {
   }
 });
 
+server.on("request", (req) => {
+  console.log("event received: ", req.method, req.url);
+});
+
 server.listen(3000, () => {
   console.log("Number guessing game running on http://localhost:3000");
 });
