@@ -3,13 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Fetch</title>
+    <title>People API</title>
 </head>
 <body>
-    <h1>Product List</h1>
-    <button id="fetchProductsBtn">Fetch Products</button>
-    <div id="productList"></div>
+    <h1>People API</h1>
 
-    <script src="script.js"></script>
+    <h2>Add Person</h2>
+    <form id="add-person-form">
+        <input type="text" id="person-name" placeholder="Enter name" required>
+        <button type="submit">Add Person</button>
+    </form>
+
+    <h2>People List</h2>
+    <ul id="people-list"></ul>
+
+    <script>
+        const form = document.getElementById('add-person-form');
+        const nameInput = document.getElementById('person-name');
+        const peopleList = document.getElementById('people-list');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = nameInput.value;
+
+            const response = await fetch('/api/v1/people', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name }),
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                alert('Person added successfully!');
+                loadPeople();
+            } else {
+                alert('Error adding person');
+            }
+        });
+
+        async function loadPeople() {
+            const response = await fetch('/api/v1/people');
+            const people = await response.json();
+            peopleList.innerHTML = people.map(person => `<li>${person.name}</li>`).join('');
+        }
+
+        loadPeople();
+    </script>
 </body>
 </html>
