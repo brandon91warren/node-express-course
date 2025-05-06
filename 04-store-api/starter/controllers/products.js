@@ -50,7 +50,7 @@ if (numericFilters) {
     let result = Product.find(queryObject)
     //sort
     if(sort){
-        const sortList = sort.split(',').join('');
+        const sortList = sort.split(',').join(' ');
         result = result.sort(sortList)
     }
     else{
@@ -66,8 +66,7 @@ const limit = Number(req.query.limit) || 10
 const skip = (page - 1) * limit;
 
 result = result.skip(skip).limit(limit)
-// 23
-// 4 7 7 7 2
+
 
 
     const products = await result
